@@ -17,6 +17,8 @@ def on_connect(client, userdata, flags, rc):
     print(f"Connected with result code {rc}")
     # Subscribe to the topic when connected
     client.subscribe(topic)
+    client.subscribe(topic1)
+    client.subscribe(topic2)
 
 # Callback when a message is received from the broker
 def on_message(client, userdata, msg):
