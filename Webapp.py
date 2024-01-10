@@ -4,7 +4,11 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+def home():
     return render_template('home.html')
+
+@app.route('/temperature/')
+def temp():
+    return render_template('Temperature_Graphs.html')
 
 app.run(host='0.0.0.0', port=5000)
