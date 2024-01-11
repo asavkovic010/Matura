@@ -4,6 +4,17 @@
     display: grid;
     grid-template-columns: 10% 90%;
   }
+  .parent {
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: left;
+}
+  .child {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+}
   </style>
   </head>
 
@@ -11,12 +22,63 @@
 <div class="grid-container">
 
   <div>
-    <p><a href="/temperature/">druga stran</a></p>
-  </div>
+    <div>
+    <p><a href="/">Home</a></p>
+    </div>
+    <div>
+    <p><a href="/temperature/">Temperature</a></p>
+    </div>
+    <div>
+    <p><a href="/humidity/">Humidity</a></p>
+    </div>
+    <div>
+    <p><a href="/pressure/">Pressure</a></p>
+    </div>
+    </div>
   
-  <div>
-    <h1>HOME</h1>
-    <p>tukaj je prva spletna stran</p>
+  <div class ="parent">
+    
+
+    <div class ="child">
+    <h2>DNEVNA SOBA</h2>
+    <p>Temperatura: </p>
+    <p>Vlažnost: </p>
+    <p>Pritisk: </p>
+    </div>
+
+    <div class ="child">
+      <h2>KUHINJA</h2>
+      <p>Temperatura: </p>
+      <p>Vlažnost: </p>
+      <p>Pritisk: </p>
+    </div>
+    
+    <div class ="child">
+      <h2>SPALNICA 1</h2>
+      <p>Temperatura: </p>
+      <p>Vlažnost: </p>
+      <p>Pritisk: </p>
+    </div>
+    
+    <div class ="child">
+      <h2>SPALNICA 2</h2>
+      <p>Temperatura: </p>
+      <p>Vlažnost: </p>
+      <p>Pritisk: </p>
+    </div> 
+
+    <div class ="child">
+      <h2>SPALNICA 3</h2>
+      <p>Temperatura: </p>
+      <p>Vlažnost: </p>
+      <p>Pritisk: </p>
+    </div>
+
+    <div class ="child">
+      <h2>WC</h2>
+      <p>Temperatura: </p>
+      <p>Vlažnost: </p>
+      <p>Pritisk: </p>
   </div>
 
   

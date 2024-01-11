@@ -11,4 +11,12 @@ def home():
 def temp():
     return render_template('Temperature_Graphs.html')
 
+@app.route('/humidity/')
+def hum():
+    return render_template('Humidity_Graphs.html')
+
+@app.route('/pressure/')
+def press():
+    return render_template('Pressure_Graphs.html')
+
 app.run(host='0.0.0.0', port=5000)
