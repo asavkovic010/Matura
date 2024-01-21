@@ -52,6 +52,7 @@ def create_mqtt_client():
     mqtt_client.connect(broker_address, broker_port, 60)
 
     # Start the MQTT client in a background thread
+    print('connected to mqtt server')
     mqtt_client.loop_start()
 
 
@@ -61,7 +62,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    temp = data.get('3', {}).get('temp')
+
+    if temp == None:
+        pass
+
+    else:
+        temp = temp[-1]
+    return render_template('home.html', temperatura=temp)
 
 @app.route('/temperature/')
 def temp():
@@ -80,11 +88,31 @@ def soba():
     room = request.args.get('room', default="???", type=str)
     return render_template('soba.html', soba=room)
 
+@app.get('/test')
+def get_test():
+    dtemp = data.get('3', {}).get('temp')
+    dhum = data.get('3', {}).get('hum')
+    dpress = data.get('3', {}).get('press')
+
+    if dtemp == None and dhum == None and dpress == None:
+        pass
+
+    else:
+        dhum = dhum[-1]
+        dpress = dpress[-1]
+        dtemp = dtemp[-1]
+
+    dictionary = {}
+    dictionary["temp"] = dtemp
+    dictionary["hum"] = dhum
+    dictionary["press"] = dpress
+    return dictionary
+
 
 
 
 if __name__ == "__main__":
     print('start')
     create_mqtt_client()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
     print('end')
