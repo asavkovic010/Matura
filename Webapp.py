@@ -6,7 +6,14 @@ import time
 broker_address = "192.168.178.58"
 broker_port = 1883
 topic = "meritve/#"
-data = {}
+data = {'1': {'soba': 'dnevna_soba',},
+        '2': {'soba': 'kuhinja',},
+        '3': {'soba': 'spalnica1',},
+        '4': {'soba': 'spalnica2',},
+        '5': {'soba': 'spalnica3',},
+        '6': {'soba': 'WC',},       
+        
+}
 
 
 def on_connect(client, userdata, flags, rc):
@@ -88,25 +95,81 @@ def soba():
     room = request.args.get('room', default="???", type=str)
     return render_template('soba.html', soba=room)
 
-@app.get('/test')
-def get_test():
-    dtemp = data.get('3', {}).get('temp')
-    dhum = data.get('3', {}).get('hum')
-    dpress = data.get('3', {}).get('press')
+@app.get('/get_roomname')
+def get_roomname():
+    roomid = request.args.get('room', default="???", type=str)
+    imesobe = data.get(roomid, {}).get('soba')
 
-    if dtemp == None and dhum == None and dpress == None:
+    return {'room_id': roomid, 'soba': imesobe}
+
+
+@app.get('/last_mesurments')
+def get_dnevna_soba():
+    roomid = request.args.get('room', default="???", type=str)
+    mtemp = data.get(roomid, {}).get('temp')
+    mhum = data.get(roomid, {}).get('hum')
+    mpress = data.get(roomid, {}).get('press')
+
+    if mtemp == None and mhum == None and mpress == None:
         pass
 
     else:
-        dhum = dhum[-1]
-        dpress = dpress[-1]
-        dtemp = dtemp[-1]
+        mhum = mhum[-1]
+        mpress = mpress[-1]
+        mtemp = mtemp[-1]
 
-    dictionary = {}
-    dictionary["temp"] = dtemp
-    dictionary["hum"] = dhum
-    dictionary["press"] = dpress
-    return dictionary
+    dlast_mesurments = {}
+    dlast_mesurments["temp"] = mtemp
+    dlast_mesurments["hum"] = mhum
+    dlast_mesurments["press"] = mpress
+    return dlast_mesurments
+
+
+#ovo ispod jos ne radi
+@app.get('/get_temperature')
+def get_temp():
+    dtemp = {}
+    tkeys = list(data.keys())
+    for x in tkeys:
+        gtemp = data.get(x, {}).get('temp')
+        gtsoba = data.get(x, {}).get('soba')
+    if gtemp == None:
+        pass
+
+    else:
+        dtemp[gtsoba] = gtemp
+    
+    return dtemp
+
+@app.get('/get_humidity')
+def get_humidity():
+    dhum = {}
+    tkeys = list(data.keys())
+    for x in tkeys:
+        ghum = data.get(x, {}).get('hum')
+        ghsoba = data.get(x, {}).get('soba')
+    if ghum == None:
+        pass
+
+    else:
+        dhum[ghsoba] = ghum
+    
+    return dhum
+
+@app.get('/get_pressure')
+def get_pressure():
+    dpress = {}
+    tkeys = list(data.keys())
+    for x in tkeys:
+        gpress = data.get(x, {}).get('press')
+        gpsoba = data.get(x, {}).get('soba')
+    if gpress == None:
+        pass
+
+    else:
+        dpress[gpsoba] = gpress
+    
+    return dpress
 
 
 

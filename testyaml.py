@@ -3,12 +3,14 @@ import json
 
 data = {
 	'3': {
+        'soba': 'kuhinja',
 		'temp': [12, 23, 33],
 		'hum': [12, 23, 33],
 		'press': [12, 23, 33]
 	},
 	'24': {
-		'temp': [12, 23, 33],
+        'soba': 'spalnica',
+		'temp': [12, 13, 33],
 		'hum': [12, 23, 33],
 		'press': [12, 23, 33]
 	}
