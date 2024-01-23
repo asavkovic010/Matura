@@ -6,12 +6,12 @@ import time
 broker_address = "192.168.178.58"
 broker_port = 1883
 topic = "meritve/#"
-data = {'101': {'soba': 'dnevna soba',},
-        '201': {'soba': 'kuhinja',},
-        '301': {'soba': 'spalnica1',},
-        '4': {'soba': 'spalnica2',},
-        '5': {'soba': 'spalnica3',},
-        '6': {'soba': 'WC',},       
+data = {'1': {'soba': 'dnevna soba', 'temp': [12, 23, 13], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
+        '2': {'soba': 'kuhinja', 'temp': [22, 23, 23], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
+        '3': {'soba': 'spalnica1', 'temp': [32, 23, 33], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
+        '4': {'soba': 'spalnica2', 'temp': [42, 23, 43], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
+        '5': {'soba': 'spalnica3', 'temp': [52, 23, 53], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
+        '6': {'soba': 'WC', 'temp': [62, 23, 63], 'hum': [12, 23, 33], 'press': [12, 23, 33]},       
         
 }
 
@@ -92,8 +92,9 @@ def press():
 
 @app.route('/soba')
 def soba():
-    room = request.args.get('room', default="???", type=str)
-    return render_template('soba.html', soba=room)
+    roomid = request.args.get('room', default="???", type=str)
+    roomname = data.get(roomid, {}).get('soba')
+    return render_template('soba.html', soba=roomname)
 
 @app.get('/get_roomname')
 def get_roomname():
@@ -104,7 +105,7 @@ def get_roomname():
 
 
 @app.get('/last_mesurments')
-def get_dnevna_soba():
+def get_last_mesurmnts():
     roomid = request.args.get('room', default="???", type=str)
     mtemp = data.get(roomid, {}).get('temp')
     mhum = data.get(roomid, {}).get('hum')
@@ -123,6 +124,38 @@ def get_dnevna_soba():
     dlast_mesurments["hum"] = mhum
     dlast_mesurments["press"] = mpress
     return dlast_mesurments
+
+@app.get('/all_last_mesurments')
+def get_all_last_mesurments():
+    dall_last_mesurments = {}
+    keys = list(data.keys())
+
+    for i in keys:
+        amtemp = data.get(i, {}).get('temp')
+        amhum = data.get(i, {}).get('hum')
+        ampress = data.get(i, {}).get('press')
+        if amtemp == None and amhum == None and ampress == None:
+            pass
+
+        else:
+            amhum = amhum[-1]
+            ampress = ampress[-1]
+            amtemp = amtemp[-1]
+        dall_last_mesurments[i] = {'temp': amtemp, 'hum': amhum, 'press': ampress}
+
+    # if mtemp == None and mhum == None and mpress == None:
+    #     pass
+
+    # else:
+    #     mhum = mhum[-1]
+    #     mpress = mpress[-1]
+    #     mtemp = mtemp[-1]
+
+    # dlast_mesurments = {}
+    # dlast_mesurments["temp"] = mtemp
+    # dlast_mesurments["hum"] = mhum
+    # dlast_mesurments["press"] = mpress
+    return dall_last_mesurments
 
 @app.get('/get_all_room_names')
 def get_all_room_names():
