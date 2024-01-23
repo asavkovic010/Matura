@@ -1,3 +1,5 @@
+<html>
+<script src="{{ url_for('static', filename='main.js')}}"></script>
 <head>
   <style>
   .grid-container {
@@ -34,7 +36,7 @@
     </script>
 
 </head>
-<body onload="foo()">
+<body onload="setTimeout(onloadfn(), 0)">
 <div class="grid-container">
 
   <div>
@@ -69,56 +71,56 @@
     <a href="/soba?room=DNEVNA_SOBA">
     <div class ="child">
     <h2>DNEVNA SOBA</h2>
-    <p>Temperatura:  {{temperatura}}</p>
-    <p>Vlažnost: </p>
-    <p>Pritisk: </p>
+    <p id="temperatureDS">Temperatura: </p>
+    <p id="humidityDS">Vlažnost: </p>
+    <p id="pressureDS">Pritisk: </p>
     </div>
     </a>
 
     <a href="/soba?room=KUHINJA">
     <div class ="child">
       <h2>KUHINJA</h2>
-      <p>Temperatura:  {{temperatura}}</p>
-      <p>Vlažnost: </p>
-      <p>Pritisk: </p>
+      <p id="temperatureK">Temperatura: </p>
+      <p id="humidityK">Vlažnost: </p>
+      <p id="pressureK">Pritisk: </p>
     </div>
     </a>
     
     <a href="/soba?room=SPALNICA1">
     <div class ="child">
       <h2>SPALNICA 1</h2>
-      <p>Temperatura:  {{temperatura}}</p>
-      <p>Vlažnost: </p>
-      <p>Pritisk: </p>
+      <p id="temperatureS1">Temperatura: </p>
+      <p id="humidityS1">Vlažnost: </p>
+      <p id="pressureS1">Pritisk: </p>
     </div>
     </a>
     
     <a href="/soba?room=SPALNICA2">
     <div class ="child">
       <h2>SPALNICA 2</h2>
-      <p>Temperatura:  {{temperatura}}</p>
-      <p>Vlažnost: </p>
-      <p>Pritisk: </p>
+      <p id="temperatureS2">Temperatura: </p>
+      <p id="humidityS2">Vlažnost: </p>
+      <p id="pressureS2">Pritisk: </p>
     </div> 
     </a>
 
     <a href="/soba?room=SPALNICA3">
     <div class ="child">
       <h2>SPALNICA 3</h2>
-      <p>Temperatura:  {{temperatura}}</p>
-      <p>Vlažnost: </p>
-      <p>Pritisk: </p>
+      <p id="temperatureS3">Temperatura: </p>
+      <p id="humidityS3">Vlažnost: </p>
+      <p id="pressureS3">Pritisk: </p>
     </div>
     </a>
 
     <a href="/soba?room=WC">
     <div class ="child">
       <h2>WC</h2>
-      <p>Temperatura:  {{temperatura}}</p>
-      <p>Vlažnost: </p>
-      <p>Pritisk: </p>
+      <p id="temperatureWC">Temperatura: </p>
+      <p id="humidityWC">Vlažnost: </p>
+      <p id="pressureWC">Pritisk: </p>
   </div>
   </a>
 </body>
-
+</html>
   
