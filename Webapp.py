@@ -6,9 +6,9 @@ import time
 broker_address = "192.168.178.58"
 broker_port = 1883
 topic = "meritve/#"
-data = {'1': {'soba': 'dnevna_soba',},
-        '2': {'soba': 'kuhinja',},
-        '3': {'soba': 'spalnica1',},
+data = {'101': {'soba': 'dnevna soba',},
+        '201': {'soba': 'kuhinja',},
+        '301': {'soba': 'spalnica1',},
         '4': {'soba': 'spalnica2',},
         '5': {'soba': 'spalnica3',},
         '6': {'soba': 'WC',},       
@@ -124,8 +124,18 @@ def get_dnevna_soba():
     dlast_mesurments["press"] = mpress
     return dlast_mesurments
 
+@app.get('/get_all_room_names')
+def get_all_room_names():
+    dall_room_names = {}
+    keys = list(data.keys())
 
-#ovo ispod jos ne radi
+    for i in keys:
+        imesobe = data.get(i, {}).get('soba')
+        dall_room_names[i] = imesobe
+    return dall_room_names
+
+
+#ovo ispod jos ne radi -------------------------------------------------------------
 @app.get('/get_temperature')
 def get_temp():
     dtemp = {}
@@ -170,7 +180,7 @@ def get_pressure():
         dpress[gpsoba] = gpress
     
     return dpress
-
+#-----------------------------------------------------------------------------------------
 
 
 
