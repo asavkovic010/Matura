@@ -1,12 +1,28 @@
-<head>
-    <style>
-    .grid-container {
-      display: grid;
-      grid-template-columns: 10% 90%;
-    }
-    </style>
+<!DOCTYPE html>
+<html>
+
+<script src="{{ url_for('static', filename='soba.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <head>
+      <style>
+        .grid-container {
+          display: grid;
+          grid-template-columns: 10% 90%;
+        }
+        
+        .graf {
+          border: 3px solid black;
+          width: 1000px;
+          height: 400px;
+          border-radius: 0.5rem;
+          margin: 1rem;
+          }
+        </style>
     </head>
   
+  <body onload="setTimeout(onloadfn(), 0)">
   <div>time</div>
   <div class="grid-container">
   
@@ -18,25 +34,13 @@
       </a>
   
     </div>
-    
-    <div>
-      
-      <h1>{{soba}}</h1>
-  
-      <div style="border: 1px solid black">
-      <h2>TEMPERATURA</h2>
-      <p>GRAF</p>
+      <div>
+        
+        <h1>{{soba}}</h1>
+          <div class="graf" id="mytemp"></div>
+          <div class="graf" id="myhum"></div>
+          <div class="graf" id="mypress"></div>
       </div>
-  
-      <div style="border: 1px solid black">
-        <h2>VLAGA</h2>
-        <p>GRAF</p>
-      </div>
-      
-      <div style="border: 1px solid black">
-        <h2>PRITISK</h2>
-        <p>GRAF</p>
-      </div>
-  
-  
-    </div>
+
+    </body>
+  </html>

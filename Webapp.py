@@ -2,16 +2,17 @@ from flask import Flask, render_template, request
 import paho.mqtt.client as mqtt
 import time
 
+MAX_MEAS_NO = 30
 # MQTT broker details
 broker_address = "192.168.178.58"
 broker_port = 1883
 topic = "meritve/#"
-data = {'1': {'soba': 'dnevna soba', 'temp': [12, 23, 13], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
-        '2': {'soba': 'kuhinja', 'temp': [22, 23, 23], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
-        '3': {'soba': 'spalnica1', 'temp': [32, 23, 33], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
-        '4': {'soba': 'spalnica2', 'temp': [42, 23, 43], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
-        '5': {'soba': 'spalnica3', 'temp': [52, 23, 53], 'hum': [12, 23, 33], 'press': [12, 23, 33]},
-        '6': {'soba': 'WC', 'temp': [62, 23, 63], 'hum': [12, 23, 33], 'press': [12, 23, 33]},       
+data = {'1': {'soba': 'dnevna soba', 'temp': [12, 23, 13], 'hum': [12, 23, 33], 'press': [1012, 1013, 1010]},
+        '2': {'soba': 'kuhinja', 'temp': [22, 23, 23], 'hum': [12, 23, 33], 'press': [1012, 1013, 1010]},
+        '3': {'soba': 'spalnica1', 'temp': [32, 23, 33], 'hum': [12, 23, 33], 'press': [1012, 1013, 1010]},
+        '4': {'soba': 'spalnica2', 'temp': [42, 23, 43], 'hum': [12, 23, 33], 'press': [1012, 1013, 1010]},
+        '5': {'soba': 'spalnica3', 'temp': [52, 23, 53], 'hum': [12, 23, 33], 'press': [1012, 1013, 1010]},
+        '6': {'soba': 'WC', 'temp': [21, 22, 20], 'hum': [12, 23, 33], 'press': [1012, 1013, 1010]},       
         
 }
 
@@ -41,6 +42,8 @@ def on_message(client, userdata, msg):
     if stari_podatki is None:
         stari_podatki = []
     stari_podatki.append(novi_podatak)
+    if len(stari_podatki) > MAX_MEAS_NO:
+        stari_podatki.pop(0)
 
     module_data[vrsta] = stari_podatki
     data[module_id] = module_data
@@ -167,21 +170,34 @@ def get_all_room_names():
         dall_room_names[i] = imesobe
     return dall_room_names
 
+@app.get('/get_all_mesurments')
+def get_all_mesurments():
+    dmes = {}
+    tkeys = list(data.keys())
+    for x in tkeys:
+        gatemp = data.get(x, {}).get('temp')
+        gahum = data.get(x, {}).get('hum')
+        gapress = data.get(x, {}).get('press')
+        if gatemp == None and gahum == None and gapress == None:
+            pass
 
-#ovo ispod jos ne radi -------------------------------------------------------------
+        else:
+            dmes[x] = {'temp': gatemp, 'hum': gahum, 'press': gapress}
+        
+    return dmes
+
 @app.get('/get_temperature')
 def get_temp():
     dtemp = {}
     tkeys = list(data.keys())
     for x in tkeys:
         gtemp = data.get(x, {}).get('temp')
-        gtsoba = data.get(x, {}).get('soba')
-    if gtemp == None:
-        pass
+        if gtemp == None:
+            pass
 
-    else:
-        dtemp[gtsoba] = gtemp
-    
+        else:
+            dtemp[x] = gtemp
+        
     return dtemp
 
 @app.get('/get_humidity')
@@ -190,12 +206,11 @@ def get_humidity():
     tkeys = list(data.keys())
     for x in tkeys:
         ghum = data.get(x, {}).get('hum')
-        ghsoba = data.get(x, {}).get('soba')
-    if ghum == None:
-        pass
+        if ghum == None:
+            pass
 
-    else:
-        dhum[ghsoba] = ghum
+        else:
+            dhum[x] = ghum
     
     return dhum
 
@@ -205,17 +220,22 @@ def get_pressure():
     tkeys = list(data.keys())
     for x in tkeys:
         gpress = data.get(x, {}).get('press')
-        gpsoba = data.get(x, {}).get('soba')
-    if gpress == None:
-        pass
+        if gpress == None:
+            pass
 
-    else:
-        dpress[gpsoba] = gpress
+        else:
+            dpress[x] = gpress
     
     return dpress
-#-----------------------------------------------------------------------------------------
 
-
+@app.get('/get_room_meas')
+def get_room_meas():
+    roomid = request.args.get('room', default="???", type=str)
+    rtemp = data.get(roomid, {}).get('temp')
+    rhum = data.get(roomid, {}).get('hum')
+    rpress = data.get(roomid, {}).get('press')
+        
+    return {'temp': rtemp, 'hum': rhum, 'press': rpress}
 
 if __name__ == "__main__":
     print('start')
