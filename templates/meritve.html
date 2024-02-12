@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
     <style>
     .grid-container {
@@ -6,7 +8,7 @@
     }
     </style>
     </head>
-  
+<body> 
   <div>time</div>
   <div class="grid-container">
   
@@ -17,29 +19,29 @@
       </div>
       </a>
   
-      <a href='/temperature/'>
+      <a href='/meritve?vrsta=Temperatura'>
       <div>
       <p>Temperatura</p>
       </div>
       </a>
   
-      <a href="/humidity/">
+      <a href="/meritve?vrsta=Vlažnost zraka">
       <div>
-      <p>Humidity</p>
+      <p>Vlažnost zraka</p>
       </div>
       </a>
       
-      <a href="/pressure/">
+      <a href="/meritve?vrsta=Zračni tlak">
       <div>
-      <p>Pressure</p>
+      <p>Zračni tlak</p>
       </div>
       </a> 
   
     </div>
     
     <div>
-
-      <h1>PRESSURE</h1>
+      
+        <h1>{{naslov}}</h1>
   
       <div style="border: 1px solid black">
       <h2>DNEVNA SOBA</h2>
@@ -73,5 +75,7 @@
 
 
     </div>
-  
+  </body> 
+
+  </html>
     

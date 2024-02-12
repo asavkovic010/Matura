@@ -99,6 +99,11 @@ def soba():
     roomname = data.get(roomid, {}).get('soba')
     return render_template('soba.html', soba=roomname)
 
+@app.route('/meritve')
+def meritve():
+    vrsta = request.args.get('vrsta', default="???", type=str)
+    return render_template('meritve.html', naslov=vrsta)
+
 @app.get('/get_roomname')
 def get_roomname():
     roomid = request.args.get('room', default="???", type=str)

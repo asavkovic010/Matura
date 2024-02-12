@@ -63,6 +63,7 @@ function show_graphs(){
       };
 
       var humtrace = {
+        autosize: true,
         x: xhum,
         y: data.hum,
         mode: 'lines+markers',
