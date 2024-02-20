@@ -28,7 +28,7 @@ function onloadfn() {
 
 function get_rooms_and_show_rooms(){
 
-    let url = 'http://172.25.119.98:5000/get_all_room_names'
+    let url = 'http://127.0.0.1:5000/get_all_room_names'
     let linkold = ''
 
     get_restapi_data(url).then(data => {
@@ -56,7 +56,7 @@ function get_rooms_and_show_rooms(){
 
 function get_and_show_mesurments(){
     
-    let url = 'http://172.25.119.98:5000/all_last_mesurments'
+    let url = 'http://127.0.0.1:5000/all_last_mesurments'
 
     get_restapi_data(url).then(data => {
         // console.log(data);

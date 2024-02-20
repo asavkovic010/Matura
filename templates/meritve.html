@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
+
+<script src="{{ url_for('static', filename='meritve.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 <head>
+  <meta charset="UTF-8">
     <style>
     .grid-container {
       display: grid;
       grid-template-columns: 10% 90%;
     }
+
+    .graf {
+          border: 3px solid black;
+          width: 820px;
+          height: 255px;
+          border-radius: 0.5rem;
+          margin: 1rem;
+    }
     </style>
     </head>
-<body> 
+<body onload="setTimeout(onloadfn(), 0)"> 
   <div>time</div>
   <div class="grid-container">
   
@@ -42,6 +56,10 @@
     <div>
       
         <h1>{{naslov}}</h1>
+
+        <div id="glavnidiv"> </div>
+
+      <!-- <div class="graf" id="mytemp"></div>
   
       <div style="border: 1px solid black">
       <h2>DNEVNA SOBA</h2>
@@ -71,10 +89,8 @@
       <div style="border: 1px solid black">
         <h2>WC</h2>
         <p>GRAF</p>
-      </div>
+      </div> -->
 
-
-    </div>
   </body> 
 
   </html>

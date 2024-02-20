@@ -34,7 +34,7 @@ function show_graphs(){
     let roomid = myString.charAt(stringLength - 1)
     console.log('lastChar: ', roomid); // this will be the string
 
-    let url = `http://172.25.119.98:5000/get_room_meas?room=${roomid}`
+    let url = `http://127.0.0.1:5000/get_room_meas?room=${roomid}`
     
 
     get_restapi_data(url).then(data => {

@@ -81,17 +81,6 @@ def home():
         temp = temp[-1]
     return render_template('home.html', temperatura=temp)
 
-@app.route('/temperature/')
-def temp():
-    return render_template('Temperature_Graphs.html')
-
-@app.route('/humidity/')
-def hum():
-    return render_template('Humidity_Graphs.html')
-
-@app.route('/pressure/')
-def press():
-    return render_template('Pressure_Graphs.html')
 
 @app.route('/soba')
 def soba():
@@ -110,7 +99,6 @@ def get_roomname():
     imesobe = data.get(roomid, {}).get('soba')
 
     return {'room_id': roomid, 'soba': imesobe}
-
 
 @app.get('/last_mesurments')
 def get_last_mesurmnts():
@@ -197,11 +185,12 @@ def get_temp():
     tkeys = list(data.keys())
     for x in tkeys:
         gtemp = data.get(x, {}).get('temp')
+        gname = data.get(x, {}).get('soba')
         if gtemp == None:
             pass
 
         else:
-            dtemp[x] = gtemp
+            dtemp[x] = {'ime': gname, 'podatki': gtemp}
         
     return dtemp
 
@@ -211,11 +200,12 @@ def get_humidity():
     tkeys = list(data.keys())
     for x in tkeys:
         ghum = data.get(x, {}).get('hum')
+        gname = data.get(x, {}).get('soba')
         if ghum == None:
             pass
 
         else:
-            dhum[x] = ghum
+            dhum[x] = {'ime': gname, 'podatki': ghum}
     
     return dhum
 
@@ -225,11 +215,12 @@ def get_pressure():
     tkeys = list(data.keys())
     for x in tkeys:
         gpress = data.get(x, {}).get('press')
+        gname = data.get(x, {}).get('soba')
         if gpress == None:
             pass
 
         else:
-            dpress[x] = gpress
+            dpress[x] = {'ime': gname, 'podatki': gpress}
     
     return dpress
 
