@@ -6,8 +6,21 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <head>
-  <meta charset="UTF-8">
-    <style>
+  <script type="text/javascript">
+    function foo() {
+        console.log('ok');
+    }
+    window.onload = codeAddress;
+    </script>
+
+  <title>sdsdcs</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <!-- <style>
     .grid-container {
       display: grid;
       grid-template-columns: 10% 90%;
@@ -20,78 +33,38 @@
           border-radius: 0.5rem;
           margin: 1rem;
     }
-    </style>
+    </style> -->
     </head>
-<body onload="setTimeout(onloadfn(), 0)"> 
-  <div>time</div>
-  <div class="grid-container">
-  
-    <div>
-      <a href="/">
-      <div>
-      <p>Home</p>
+<body onload="setTimeout(onloadfn(), 0)">
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='smarthome2.png')}}" alt=""></a>
       </div>
-      </a>
-  
-      <a href='/meritve?vrsta=Temperatura'>
-      <div>
-      <p>Temperatura</p>
-      </div>
-      </a>
-  
-      <a href="/meritve?vrsta=Vlažnost zraka">
-      <div>
-      <p>Vlažnost zraka</p>
-      </div>
-      </a>
-      
-      <a href="/meritve?vrsta=Zračni tlak">
-      <div>
-      <p>Zračni tlak</p>
-      </div>
-      </a> 
-  
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="time"> time</a></li>
+      </ul>
     </div>
-    
-    <div>
-      
-        <h1>{{naslov}}</h1>
+  </nav>
 
-        <div id="glavnidiv"> </div>
-
-      <!-- <div class="graf" id="mytemp"></div>
+  <div class="container-fluid text-center">    
+    <div class="row content">
+      <div class="col-sm-2 sidenav" id="sidenavigation">
+        <p><a href="/"><img class="icon" src="{{ url_for('static', filename='home.png')}}" alt=""> Domov</a></p>
+        <!-- <p></i><a href='/meritve?vrsta=Temperatura'>Temperatura</a></p>
+        <p><a href="/meritve?vrsta=Vlažnost zraka">Vlažnost zraka</a></p>
+        <p><a href="/meritve?vrsta=Zračni tlak">Zračni tlak</a></p> -->
+        <p></i><a href='/meritve?vrsta=Temperatura'><img class="icon" src="{{ url_for('static', filename='thermometer.png')}}" alt=""> Temperatura</a></p>
+        <p><a href="/meritve?vrsta=Vlažnost zraka"><img class="icon" src="{{ url_for('static', filename='humidity.png')}}" alt=""> Vlažnost zraka</a></p>
+        <p><a href="/meritve?vrsta=Zračni tlak"><img class="icon" src="{{ url_for('static', filename='air.png')}}" alt=""> Zračni tlak</a></p>
   
-      <div style="border: 1px solid black">
-      <h2>DNEVNA SOBA</h2>
-      <p>GRAF</p>
       </div>
-  
-      <div style="border: 1px solid black">
-        <h2>KUHINJA</h2>
-        <p>GRAF</p>
+      <div class="col-sm-5 text-left">
+        <h1>{{naslov}}</h1> 
+        <div id="glavnidiv"></div>
       </div>
-      
-      <div style="border: 1px solid black">
-        <h2>SPALNICA 1</h2>
-        <p>GRAF</p>
-      </div>
-      
-      <div style="border: 1px solid black">
-        <h2>SPALNICA 2</h2>
-        <p>GRAF</p>
-      </div> 
-  
-      <div style="border: 1px solid black">
-        <h2>SPALNICA 3</h2>
-        <p>GRAF</p>
-      </div>
-  
-      <div style="border: 1px solid black">
-        <h2>WC</h2>
-        <p>GRAF</p>
-      </div> -->
-
-  </body> 
-
+    </div>
+  </div>
   </html>
-    
+  

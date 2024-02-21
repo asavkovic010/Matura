@@ -61,7 +61,7 @@ function get_restapi_press(urlp) {
 
 function get_restapi_names(urli) {
     return fetch(
-        urlp, 
+        urli, 
         {
             headers: { "Content-Type": "application/json" },
             method: "GET",
@@ -82,8 +82,32 @@ function get_restapi_names(urli) {
 
 function onloadfn() {
     console.log("Onload starting")
+    draw_div()
     show_graphs()
+    setInterval(() => {
+        show_graphs()
+    }, 1000);
+    setInterval(() => {
+        console.log("pozivam set time")
+        set_time()
+    }, 1000);
+    set_nav_hight()
 
+}
+
+function draw_div(){
+    
+    let urli = `http://127.0.0.1:5000/get_all_room_names `
+    let divold = ''
+
+    get_restapi_names(urli).then(data => { 
+        Object.entries(data).forEach(([roomid, name]) => {
+            let div = `<div class="graf" id=${roomid}></div>`
+            divold += div;
+        });
+        console.log("generating divs")
+        document.getElementById("glavnidiv").innerHTML = divold;
+    });
 }
 
 function show_graphs(){
@@ -121,7 +145,14 @@ function show_graphs(){
 
                 var tlayout = {
                     title: datat.ime,
-                    showlegend: false
+                    showlegend: false,
+                    margin: {
+                        l: 50,
+                        r: 5,
+                        b: 50,
+                        t: 70,
+                        pad: 3
+                      },
                 };
                 
 
@@ -133,13 +164,13 @@ function show_graphs(){
                 }, 0);
 
 
-                let graph = `<div class="graf" id=${roomid}></div>`
-                graphold += graph;
+                // let graph = `<div class="graf" id=${roomid}></div>`
+                // graphold += graph;
 
             });
             
-            console.log("generating divs")
-            document.getElementById("glavnidiv").innerHTML = graphold;
+            // console.log("generating divs")
+            // document.getElementById("glavnidiv").innerHTML = graphold;
             });
         }
 
@@ -165,7 +196,14 @@ function show_graphs(){
 
                 var hlayout = {
                     title: datah.ime,
-                    showlegend: false
+                    showlegend: false,
+                    margin: {
+                        l: 50,
+                        r: 5,
+                        b: 50,
+                        t: 70,
+                        pad: 3
+                      },
                 };
                 
 
@@ -176,14 +214,7 @@ function show_graphs(){
                     Plotly.newPlot(roomid, humidity, hlayout, {displayModeBar: false});;
                 }, 0);
 
-
-                let graph = `<div class="graf" id=${roomid}></div>`
-                graphold += graph;
-
             });
-            
-            console.log("generating divs")
-            document.getElementById("glavnidiv").innerHTML = graphold;
             });
         }
 
@@ -209,7 +240,14 @@ function show_graphs(){
 
                 var playout = {
                     title: datap.ime,
-                    showlegend: false
+                    showlegend: false,
+                    margin: {
+                        l: 50,
+                        r: 5,
+                        b: 50,
+                        t: 70,
+                        pad: 3
+                      },
                 };
                 
 
@@ -220,15 +258,29 @@ function show_graphs(){
                     Plotly.newPlot(roomid, pressure, playout, {displayModeBar: false});;
                 }, 0);
 
-
-                let graph = `<div class="graf" id=${roomid}></div>`
-                graphold += graph;
-
             });
-            
-            console.log("generating divs")
-            document.getElementById("glavnidiv").innerHTML = graphold;
             });
         }
     
+}
+
+function set_time(){
+    
+    const d = new Date();
+    let ura = d.getHours()
+    let minuta = d.getMinutes()
+    if (ura < 10) {
+        ura = '0' + ura;
+      }
+      if (minuta < 10) {
+        minuta = '0' + minuta;
+      }
+    let time = ura+":"+minuta;
+    document.getElementById("time").innerHTML = time;
+  }
+
+
+function set_nav_hight(){
+    var div = document.getElementById('sidenavigation');
+    div.style.height = '1300px'; // Change the height to 300px
 }

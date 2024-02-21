@@ -24,6 +24,14 @@ function onloadfn() {
     console.log("==>> onloadfn()...")
     get_rooms_and_show_rooms()
     get_and_show_mesurments()
+    setInterval(() => {
+        get_and_show_mesurments()
+    }, 1000);
+    setInterval(() => {
+        console.log("pozivam set time")
+        set_time()
+    }, 1000);
+    set_nav_hight()
 }
 
 function get_rooms_and_show_rooms(){
@@ -37,7 +45,7 @@ function get_rooms_and_show_rooms(){
             // console.log(`http://172.25.119.98:5000/last_mesurments?room=${roomid}`)
             // console.log(`http://172.25.119.98:5000/soba?room=${roomname}`)
             let link = `<a href="/soba?room=${roomid}">
-            <div class ="child">
+            <div class="card">
             <h2>${roomname}</h2>
             <p id="temperatureB${roomid}">Temperatura: </p>
             <p id="humidityB${roomid}">Vlažnost: </p>
@@ -72,15 +80,24 @@ function get_and_show_mesurments(){
 
       });
     
-    // let url = 'http://172.25.119.98:5000/last_mesurments?room=1'
-
-    // get_restapi_data(url).then(data => {
-
-    //     document.getElementById("temperatureB").innerHTML = "Temperatura: " + data.temp;
-    //     document.getElementById("humidityB").innerHTML = "Vlažnost zraka: " + data.hum;
-    //     document.getElementById("pressureB").innerHTML = "Zračni pritisk: " + data.press;
-
-    //   });
-
 }
 
+function set_time(){
+    
+    const d = new Date();
+    let ura = d.getHours()
+    let minuta = d.getMinutes()
+    if (ura < 10) {
+        ura = '0' + ura;
+      }
+      if (minuta < 10) {
+        minuta = '0' + minuta;
+      }
+    let time = ura+":"+minuta;
+    document.getElementById("time").innerHTML = time;
+}
+
+function set_nav_hight(){
+    var div = document.getElementById('sidenavigation');
+    div.style.height = '100vh'; // Change the height to 300px
+}

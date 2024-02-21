@@ -23,6 +23,14 @@ function get_restapi_data(url) {
 function onloadfn() {
     console.log("Hello there")
     show_graphs()
+    setInterval(() => {
+      show_graphs()
+  }, 1000);
+    setInterval(() => {
+      console.log("pozivam set time")
+      set_time()
+  }, 1000);
+  set_nav_hight()
 
 }
 
@@ -83,17 +91,38 @@ function show_graphs(){
     
       var tlayout = {
         title: 'Temperatura ºC',
-        showlegend: false
+        showlegend: false,
+        margin: {
+          l: 50,
+          r: 5,
+          b: 50,
+          t: 70,
+          pad: 3
+        },
       };
 
       var hlayout = {
         title: 'Vlažnost zraka %',
-        showlegend: false
+        showlegend: false,
+        margin: {
+          l: 50,
+          r: 5,
+          b: 50,
+          t: 70,
+          pad: 3
+        },
       };
 
       var playout = {
         title: 'Zračni pritisk hPa',
-        showlegend: false
+        showlegend: false,
+        margin: {
+          l: 50,
+          r: 5,
+          b: 50,
+          t: 70,
+          pad: 3
+        },
       };
     
       Plotly.newPlot('mytemp', temperatura, tlayout, {displayModeBar: false});
@@ -102,4 +131,24 @@ function show_graphs(){
     
     });
 
+}
+
+function set_time(){
+    
+  const d = new Date();
+  let ura = d.getHours()
+  let minuta = d.getMinutes()
+  if (ura < 10) {
+      ura = '0' + ura;
+    }
+    if (minuta < 10) {
+      minuta = '0' + minuta;
+    }
+  let time = ura+":"+minuta;
+  document.getElementById("time").innerHTML = time;
+}
+
+function set_nav_hight(){
+  var div = document.getElementById('sidenavigation');
+  div.style.height = '100vh'; // Change the height to 300px
 }
