@@ -9,104 +9,13 @@
     window.onload = codeAddress;
     </script>
 
-  <title>sdsdcs</title>
+  <title>Merilni sistem</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-  <!-- <style>
-  
-  .grid-container {
-    display: grid;
-    grid-template-columns: 10% 90%;
-  }
-
-  .parent {
-    margin: 1rem;
-    padding: 10px;
-    text-align: left;
-  }
-
-  .child {
-    background-color: #f1f1f1;
-    box-shadow: 2px 2px rgb(46, 45, 45);
-    border-radius: 0.5rem;
-    display: inline-block;
-    border: 2px solid rgb(0, 0, 0);
-    color: rgb(46, 48, 50);
-    padding: 1rem 1rem;
-    vertical-align: middle;
-    margin: 1px;
-    min-width: 200px;
-  }
-
-  .div_test1 {
-    background-color: #f1f1f1;
-    padding: 1rem;
-    border: solid 1px #4b0606;
-    border-radius: 0.3rem;
-    text-align: justify;
-    margin: .5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-    width: 230px;
-    /* text-decoration: underline; */
-    color: rgb(20, 165, 233);
-  }
-
-  .header{
-    background-color: lightskyblue;
-    border: none;
-  }
-
-  
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 620px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-      font-size: large;
-      text-align: left;
-      margin:0px 10px 0px 0px;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-
-    .time{
-      text-align: right; 
-      color: beige;
-      align-content: center;
-    }
-
-    img{
-      max-width: 130%;
-      max-height: 130%
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style> -->
 </head>
 <body onload="setTimeout(onloadfn(), 0)">
 
@@ -124,7 +33,6 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav" id="sidenavigation">
-      <!-- <p><a href="/">Domov</a></p> -->
       <p></i><a href='/meritve?vrsta=Temperatura'><img class="icon" src="{{ url_for('static', filename='thermometer.png')}}" alt=""> Temperatura</a></p>
       <p><a href="/meritve?vrsta=Vlažnost zraka"><img class="icon" src="{{ url_for('static', filename='humidity.png')}}" alt=""> Vlažnost zraka</a></p>
       <p><a href="/meritve?vrsta=Zračni tlak"><img class="icon" src="{{ url_for('static', filename='air.png')}}" alt=""> Zračni tlak</a></p>

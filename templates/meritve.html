@@ -13,27 +13,13 @@
     window.onload = codeAddress;
     </script>
 
-  <title>sdsdcs</title>
+  <title>Merilni sistem</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-    <!-- <style>
-    .grid-container {
-      display: grid;
-      grid-template-columns: 10% 90%;
-    }
-
-    .graf {
-          border: 3px solid black;
-          width: 820px;
-          height: 255px;
-          border-radius: 0.5rem;
-          margin: 1rem;
-    }
-    </style> -->
     </head>
 <body onload="setTimeout(onloadfn(), 0)">
 
@@ -52,9 +38,6 @@
     <div class="row content">
       <div class="col-sm-2 sidenav" id="sidenavigation">
         <p><a href="/"><img class="icon" src="{{ url_for('static', filename='home.png')}}" alt=""> Domov</a></p>
-        <!-- <p></i><a href='/meritve?vrsta=Temperatura'>Temperatura</a></p>
-        <p><a href="/meritve?vrsta=Vlažnost zraka">Vlažnost zraka</a></p>
-        <p><a href="/meritve?vrsta=Zračni tlak">Zračni tlak</a></p> -->
         <p></i><a href='/meritve?vrsta=Temperatura'><img class="icon" src="{{ url_for('static', filename='thermometer.png')}}" alt=""> Temperatura</a></p>
         <p><a href="/meritve?vrsta=Vlažnost zraka"><img class="icon" src="{{ url_for('static', filename='humidity.png')}}" alt=""> Vlažnost zraka</a></p>
         <p><a href="/meritve?vrsta=Zračni tlak"><img class="icon" src="{{ url_for('static', filename='air.png')}}" alt=""> Zračni tlak</a></p>
