@@ -88,7 +88,6 @@ function onloadfn() {
         show_graphs()
     }, 1000);
     setInterval(() => {
-        console.log("pozivam set time")
         set_time()
     }, 1000);
     set_nav_hight()

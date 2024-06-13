@@ -83,7 +83,6 @@ function get_and_show_mesurments(){
 
     get_restapi_data(url).then(data => {
         Object.entries(data).forEach(([roomid, last_mesurments]) => {
-            console.log(last_mesurments);
             document.getElementById(`temperatureB${roomid}`).innerHTML = "Temperatura: " + last_mesurments.temp + " ºC";
             document.getElementById(`humidityB${roomid}`).innerHTML = "Vlažnost zraka: " + last_mesurments.hum + " %";
             document.getElementById(`pressureB${roomid}`).innerHTML = "Zračni tlak: " + last_mesurments.press + " hPa";
